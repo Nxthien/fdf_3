@@ -132,6 +132,7 @@ en:
     button: "Post"
     created: "Suggestion created!"
     not_created: "Suggestion not created!"
+    idea: "Give our your idea"
   filter:
     by_name_a_to_z: "Name [A-Z]"
     by_name_z_to_a: "Name [Z-A]"
@@ -154,7 +155,7 @@ en:
     desc: "desc"
   order:
     na: "N/A"
-    title: "%{size} Items in Cart: %{pay}"
+    title: "%{size}"
     create_succ: "Add to Cart success"
     create_err: "Add to Cart error"
     update_succ: "Update success"

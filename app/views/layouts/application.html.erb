@@ -9,7 +9,6 @@
   </head>
   <body>
     <%= render "layouts/header" %>
-    <%= render "layouts/order_text" %>
     <div class="container-fluid">
       <div class="row">
         <% flash.each do |message_type, message| %>
@@ -19,18 +18,21 @@
         <%= render "layouts/footer" %>
       </div>
       <% if logged_in? %>
-        <div class="suggestion-box">
-          <div class="box"><b class="glyphicon glyphicon-comment"></b></div>
-          <section class="suggestion_form">
-            <%= form_for @suggestion = Suggestion.new do |f| %>
-              <%= render "shared/error_messages", object: @suggestion %>
-              <div class="field">
-                <%= f.text_area :content, placeholder: t("suggestion.add") %>
-              </div>
-              <%= f.submit t("suggestion.button"), class: "btn btn-primary" %>
-            <% end %>
-          </section>
-        </div>
+        <% unless current_user.admins? %>
+          <div class="suggestion-box">
+            <div class="box"><b class="glyphicon glyphicon-comment"></b></div>
+            <section class="suggestion_form col-md-10 col-md-offset-1">
+              <p class="text-center td-sug-title"><%= t "suggestion.idea" %></p>
+              <%= form_for @suggestion do |f| %>
+                <%= render "shared/error_messages", object: @suggestion %>
+                <div class="field">
+                  <%= f.text_field :content, placeholder: t("suggestion.add") %>
+                </div>
+                <%= f.submit t("suggestion.button"), class: "btn btn-primary" %>
+              <% end %>
+            </section>
+          </div>
+        <% end %>
       <% end %>
     </div>
   </body>

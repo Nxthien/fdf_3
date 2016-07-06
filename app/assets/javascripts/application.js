@@ -28,9 +28,15 @@ var popup = function(){
 $(document).ready(popup);
 $(document).on("page:load", popup);
 
-$(document).ready(function() {  
-  $("html").niceScroll();
-});
+var nice = function(){
+  $("html").niceScroll({
+    cursorwidth: "8px",
+  });
+};
+
+$(document).ready(nice);
+$(document).on("page:load", nice);
+$(window).ready(nice);
 
 var box = function(){
   $(".box").on("click", function(){

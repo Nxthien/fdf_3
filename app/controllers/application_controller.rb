@@ -1,6 +1,8 @@
 class ApplicationController < ActionController::Base
   # Prevent CSRF attacks by raising an exception.
   # For APIs, you may want to use :null_session instead.
+  before_action :new_suggestion
+  
   protect_from_forgery with: :exception
   include SessionsHelper
 
@@ -62,5 +64,9 @@ class ApplicationController < ActionController::Base
   def order_prod_default obj
     obj.order_by("created_at", "desc")
       .paginate page: params[:page], per_page: Settings.size
+  end
+
+  def new_suggestion
+    @suggestion = Suggestion.new
   end
 end
