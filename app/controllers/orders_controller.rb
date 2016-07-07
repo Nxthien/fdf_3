@@ -9,8 +9,7 @@ class OrdersController < ApplicationController
   end
 
   def index
-    @orders = Order.find_by(user_id: current_user.id)
-      .paginate page: params[:page], per_page: Settings.size
+    @orders = Order.show(current_user.id).paginate page: params[:page], per_page: Settings.size
   end
 
   def update

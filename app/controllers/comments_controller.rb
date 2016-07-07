@@ -4,6 +4,7 @@ class CommentsController < ApplicationController
   def create
     @comment = Comment.new comment_params
     @product = Product.find_by id: @comment.product_id
+    @comments = @product.comments.order_by_time
     unless @comment.save
       flash[:danger] = t "flash.comment"
     end
@@ -20,6 +21,7 @@ class CommentsController < ApplicationController
       redirect_to root_path
     end
     @product = Product.find_by id: @comment.product_id
+    @comments = @product.comments.order_by_time
     @comment.destroy
     respond_to do |format|
       format.html { redirect_to :back }
