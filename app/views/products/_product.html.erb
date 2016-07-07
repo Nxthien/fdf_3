@@ -1,7 +1,7 @@
 <li id="product-<%= product.id %>" class="td-prod-li col-md-5">
   <div class="image-show">
     <%= link_to product_image_select(product), product %>
-    <%= form_for @order_detail do |f| %>
+    <%= form_for @order_detail, remote:true do |f| %>
       <div class="input-group-btn">
         <div class="input-group">
           <%= f.number_field :quantity, value: 1, class: "form-control", min: 1 %>

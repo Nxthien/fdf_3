@@ -18,7 +18,7 @@ class RatesController < ApplicationController
   end
 
   def check_rated
-    @product = Product.find_by_id params[:rate][:product_id]
+    @product = Product.find_by id: params[:rate][:product_id]
     if current_user.has_voted @product
       flash[:danger] = t "rates.fail"
       redirect_to @product

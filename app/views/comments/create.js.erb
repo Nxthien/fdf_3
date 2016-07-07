@@ -1,0 +1,2 @@
+$(".comments").html("<%= j render "shared/comment_on_prod", product: @product %>")
+$("#comment_field_<%= @product.id %>").val("")
