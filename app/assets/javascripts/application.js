@@ -48,6 +48,9 @@ $(document).ready(box);
 $(document).on("page:load", box);
 
 var hover = function(){
+  $("#rate-1").hover(function(){
+    $("#rate-1 .star").before().toggleClass("color-hover");
+  });
   $("#rate-2").hover(function(){
     $("#rate-2 .star").before().toggleClass("color-hover");
     $("#rate-1 .star").before().toggleClass("color-hover");

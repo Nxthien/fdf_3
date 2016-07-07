@@ -3,10 +3,14 @@ class CommentsController < ApplicationController
 
   def create
     @comment = Comment.new comment_params
+    @product = Product.find_by id: @comment.product_id
     unless @comment.save
       flash[:danger] = t "flash.comment"
     end
-    redirect_to :back
+    respond_to do |format|
+      format.html {redirect_to :back}
+      format.js
+    end 
   end
 
   def destroy  
@@ -15,8 +19,12 @@ class CommentsController < ApplicationController
       flash[:danger] = t "flash.user_nil"
       redirect_to root_path
     end
+    @product = Product.find_by id: @comment.product_id
     @comment.destroy
-    redirect_to :back
+    respond_to do |format|
+      format.html { redirect_to :back }
+      format.js
+    end
   end
 
   private

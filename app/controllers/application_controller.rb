@@ -69,4 +69,9 @@ class ApplicationController < ActionController::Base
   def new_suggestion
     @suggestion = Suggestion.new
   end
+  
+  def store_locate
+    session.delete(:return_to) unless session[:return_to]
+    session[:return_to] ||= request.url if request.get?
+  end
 end

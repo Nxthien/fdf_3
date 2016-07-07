@@ -12,8 +12,12 @@ class OrderDetailsController < ApplicationController
   def create
     @order_detail = @order.order_details.build order_detail_params
     if @order_detail.save
-      flash[:success] = t "order.create_succ"
-      redirect_to :back
+      flash.now[:success] = t "order.create_succ"
+      update_total_pay()
+      respond_to do |format|
+        format.html {redirect_to :back}
+        format.js
+      end
     else
       flash[:danger] = t "order.create_err"
       redirect_to products_path
@@ -36,7 +40,7 @@ class OrderDetailsController < ApplicationController
   def destroy
     if @order_detail.destroy
       flash[:success] = t "order.destroy_succ"
-      redirect_to order_details_path
+      redirect_to @order
     else
       flash[:danger] = t "order.destroy_err"
       redirect_to products_path

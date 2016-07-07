@@ -1,7 +1,10 @@
-<%= form_for comment= Comment.new do |f| %>
+<%= form_for @comment, remote: true do |f| %>
   <div class="comment-form">
-    <%= f.text_field :content, placeholder: t("comment.add"), class: "form-control" %>
-    <%= f.hidden_field :product_id, value: @product.id %>
+    <%= f.text_field :content,
+      placeholder: t("comment.add"),
+      id: "comment_field_#{product.id}",
+      class: "form-control" %>
+    <%= f.hidden_field :product_id, value: product.id %>
     <%= f.hidden_field :user_id, value: current_user.id %>
   </div>
 <% end %>

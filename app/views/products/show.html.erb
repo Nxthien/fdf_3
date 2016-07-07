@@ -14,9 +14,11 @@
     <span class="rate">
       <%= t "product.rate" %><%= @product.rates.average :vote %>
     </span><br>
-    <%= render @product.comments.order_by_time %>
+    <div class="comments">
+      <%= render "shared/comment_on_prod", product: @product%>
+    </div>
     <% if logged_in? %>
-      <%= render "shared/comment_form" %>
+      <%= render "shared/comment_form", product: @product %>
       <% unless current_user.has_voted @product %>
         <% @votes.each do |key, value| %>
           <%= render "shared/rate_form", key: key, value: value %>
