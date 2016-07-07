@@ -1,12 +1,13 @@
 class Order < ActiveRecord::Base
   belongs_to :user
   
-  has_many :order_details
+  has_many :order_details, dependent: :destroy
 
   before_create :init_order
   before_save :update_subtotal
 
   scope :order_by_status, -> (status) {where status: status}
+  scope :show, -> (ids) {where "id in (select id from orders where user_id = '#{ids}')"}
 
   enum status: ["blank", "ordered", "shipping", "delivered"]
 
